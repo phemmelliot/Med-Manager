@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "86740127217",
+    "firebase_url": "https://medmanager-f193b.firebaseio.com",
+    "project_id": "medmanager-f193b",
+    "storage_bucket": "medmanager-f193b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86740127217:android:cd142bed2467e06c",
+        "android_client_info": {
+          "package_name": "com.example.android.architecture.com.example.phemmelliot.todomvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86740127217-1mhknh3ks936k9rjni0c4h21knvjfnbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.architecture.com.example.phemmelliot.todomvp",
+            "certificate_hash": "00a8eb1299033a79024583d4ca27d96256b85774"
+          }
+        },
+        {
+          "client_id": "86740127217-pqq211rku8asrph40mu7aek78ffdp60t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5nDiQbg4DPWsrg7OZWQ70MW65TPNwdl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86740127217-pqq211rku8asrph40mu7aek78ffdp60t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86740127217:android:9c1274bd1b79a256",
+        "android_client_info": {
+          "package_name": "com.example.android.architecture.com.example.phemmelliot.todomvp.mock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86740127217-m4c6f30fldp2tr37ddm32i452vd44elt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.architecture.com.example.phemmelliot.todomvp.mock",
+            "certificate_hash": "00a8eb1299033a79024583d4ca27d96256b85774"
+          }
+        },
+        {
+          "client_id": "86740127217-pqq211rku8asrph40mu7aek78ffdp60t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5nDiQbg4DPWsrg7OZWQ70MW65TPNwdl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86740127217-pqq211rku8asrph40mu7aek78ffdp60t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

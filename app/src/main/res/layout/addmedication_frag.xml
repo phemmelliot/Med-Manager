@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/newpill"
+                android:scaleType="centerCrop"
+                />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <LinearLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/add_medication_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="50dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:background="@drawable/rounded_edittext_state"
+                        android:hint="@string/name_hint"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:textColor="#808080"
+                        android:textColorHint="#808080"
+                        android:gravity="center"/>
+                    <EditText
+                        android:id="@+id/add_medication_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="32dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/rounded_edittext_state"
+                        android:hint="Add Medication Description"
+                        android:imeOptions="actionNext"
+                        android:inputType="textMultiLine"
+                        android:maxLines="5"
+                        android:textColor="#808080"
+                        android:textColorHint="#808080"
+                        android:gravity="center"
+                        />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:weightSum="2"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/start_et"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:editable="false"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:background="@drawable/rounded_edittext_state"
+                        android:hint="@string/start_date"
+                        android:imeOptions="actionNext"
+                        android:inputType="date"
+                        android:maxLines="1"
+                        android:textColor="#808080"
+                        android:textColorHint="#808080"
+                        android:gravity="center"
+                        />
+                    <EditText
+                        android:id="@+id/end_et"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:editable="false"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:background="@drawable/rounded_edittext_state"
+                        android:hint="@string/end_date"
+                        android:imeOptions="actionDone"
+                        android:inputType="date"
+                        android:maxLines="1"
+                        android:textColor="#808080"
+                        android:textColorHint="#808080"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/rounded_edittext_state">
+
+                        <Spinner
+                            android:id="@+id/frequency_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:theme="@style/spinner"
+                            android:backgroundTint="@color/colorAccent"
+                            android:entries="@array/frequency_list"
+                            android:textAlignment="center"
+                            android:paddingLeft="40dp"
+                            />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp">
+
+                        <EditText
+                            android:id="@+id/start_time_et"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:editable="false"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginRight="5dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:background="@drawable/rounded_edittext_state"
+                            android:hint="@string/morning"
+                            android:imeOptions="actionNext"
+                            android:inputType="date"
+                            android:maxLines="1"
+                            android:textColor="#808080"
+                            android:textColorHint="#808080"
+                            android:gravity="center"
+                            />
+                        <EditText
+                            android:id="@+id/mid_time_et"
+                            android:visibility="invisible"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:editable="false"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:background="@drawable/rounded_edittext_state"
+                            android:hint="@string/afternoon"
+                            android:imeOptions="actionNext"
+                            android:inputType="date"
+                            android:maxLines="1"
+                            android:textColor="#808080"
+                            android:textColorHint="#808080"
+                            android:gravity="center"
+                            />
+                        <EditText
+                            android:id="@+id/end_time_et"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:visibility="invisible"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:editable="false"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="32dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:background="@drawable/rounded_edittext_state"
+                            android:hint="@string/evening"
+                            android:imeOptions="actionDone"
+                            android:inputType="date"
+                            android:maxLines="1"
+                            android:textColor="#808080"
+                            android:textColorHint="#808080"
+                            android:gravity="center"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/signUpProgress"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+            </FrameLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="colorPrimary">#FF42A5F5</color>
+    <color name="colorPrimaryDark">#FF2196F3</color>
+    <color name="colorAccent">#D50000</color>
+    <color name="itemBackground">#87CEFA</color>
+    <color name="transparent">@android:color/transparent</color>
+
+    <drawable name="completedTaskBackground">#CCCCCC</drawable>
+
+    <drawable name="touchFeedback">#CFD8DC</drawable>
+
+</resources>

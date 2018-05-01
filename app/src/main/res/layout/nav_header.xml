@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="192dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorPrimaryDark"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/newpill" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="end|center"
+            android:layout_marginRight="30dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/circle"/>
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35sp"
+                android:gravity="center"
+                android:textColor="#e5e5e5"
+                android:fontFamily="@font/pacifico"
+                android:layout_gravity="center"
+                tools:text="MT"/>
+        </FrameLayout>
+        <TextView
+            android:id="@+id/handle_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_gravity="end|center"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            tools:text="\@medtracker"/>
+    </FrameLayout>
+
+</FrameLayout>

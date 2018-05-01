@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MedManager</string>
+    <string name="add_task">New Medication</string>
+    <string name="edit_task">Edit Medication</string>
+    <string name="task_marked_complete">Medication marked complete</string>
+    <string name="task_marked_active">Medication marked active</string>
+    <string name="loading_tasks_error">Error while loading medications</string>
+    <string name="completed_tasks_cleared">Completed medications cleared</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_clear">Clear completed</string>
+    <string name="menu_delete_task">Delete medication</string>
+    <string name="navigation_view_header_title">Track Your Medications</string>
+    <string name="name_hint">Medication Name</string>
+    <string name="description_hint">Enter its description here, including dosage</string>
+    <string name="empty_task_message">Medications cannot be empty</string>
+    <string name="successfully_saved_task_message">Medication saved</string>
+    <string name="list_title">Medication List</string>
+    <string name="statistics_title">Statistics</string>
+    <string name="statistics_no_tasks">You have no medications.</string>
+    <string name="statistics_active_tasks">Active medications:</string>
+    <string name="statistics_completed_tasks">Completed medications:</string>
+    <string name="statistics_error">Error loading statistics.</string>
+    <string name="no_data">No data</string>
+    <string name="loading">LOADING</string>
+
+    <string-array name="list_tasks_array">
+        <item>@string/nav_all</item>
+        <item>@string/nav_active</item>
+        <item>@string/nav_completed</item>
+    </string-array>
+    <string name="nav_all">All</string>
+    <string name="nav_active">Active</string>
+    <string name="nav_completed">Completed</string>
+    <string name="label_all">All Medications</string>
+    <string name="label_active">Active Medications</string>
+    <string name="label_completed">Completed Medications</string>
+    <string name="no_tasks_all">You have no Medications!</string>
+    <string name="no_tasks_active">You have no active Medications!</string>
+    <string name="no_tasks_completed">You have no completed Medications!</string>
+    <string name="no_tasks_add">Add a Medication item +</string>
+    <string name="refresh">Refresh</string>
+    <string name="track_your_medications">Track Your Medications</string>
+    <string name="sign_in_with_google">Sign-In with Google</string>
+    <string name="frequency">Frequency</string>
+
+    <string-array name="frequency_list">
+        <item>Once per Day</item>
+        <item>Twice per Day</item>
+        <item>Three Times per Day</item>
+    </string-array>
+    <string name="preferenceKey">MedPreference</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="setup_profile">Setup Profile</string>
+    <string name="header_bg">header background</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="input_medication_name">Input Medication Name</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="morning">Morning</string>
+    <string name="evening">Evening</string>
+    <string name="nameKey">name</string>
+    <string name="handleKey">handle</string>
+    <string name="log_out">Log Out</string>
+</resources>
