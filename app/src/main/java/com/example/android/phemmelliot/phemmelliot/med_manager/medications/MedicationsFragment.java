@@ -68,7 +68,7 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
 
     private MedicationsContract.Presenter mPresenter;
 
-    private TasksAdapter mListAdapter;
+    private MedicationsAdapter mListAdapter;
 
     private View mNoMedicationsView;
 
@@ -99,7 +99,7 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListAdapter = new TasksAdapter(new ArrayList<Medication>(0), mItemListener);
+        mListAdapter = new MedicationsAdapter(new ArrayList<Medication>(0), mItemListener);
     }
 
     @Override
@@ -289,17 +289,17 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
      */
     TaskItemListener mItemListener = new TaskItemListener() {
         @Override
-        public void onTaskClick(Medication clickedMedication) {
+        public void onMedicationClick(Medication clickedMedication) {
             mPresenter.openMedicationDetails(clickedMedication);
         }
 
         @Override
-        public void onCompleteTaskClick(Medication completedMedication) {
+        public void onCompleteMedicationClick(Medication completedMedication) {
             mPresenter.completeMedication(completedMedication);
         }
 
         @Override
-        public void onActivateTaskClick(Medication activatedMedication) {
+        public void onActivateMedicationClick(Medication activatedMedication) {
             mPresenter.activateMedication(activatedMedication);
         }
     };
@@ -430,12 +430,12 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
         return isAdded();
     }
 
-    private static class TasksAdapter extends BaseAdapter {
+    private static class MedicationsAdapter extends BaseAdapter {
 
         private List<Medication> mMedications;
         private TaskItemListener mItemListener;
 
-        public TasksAdapter(List<Medication> medications, TaskItemListener itemListener) {
+        public MedicationsAdapter(List<Medication> medications, TaskItemListener itemListener) {
             setList(medications);
             mItemListener = itemListener;
         }
@@ -495,9 +495,9 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
                 @Override
                 public void onClick(View v) {
                     if (!medication.isCompleted()) {
-                        mItemListener.onCompleteTaskClick(medication);
+                        mItemListener.onCompleteMedicationClick(medication);
                     } else {
-                        mItemListener.onActivateTaskClick(medication);
+                        mItemListener.onActivateMedicationClick(medication);
                     }
                 }
             });
@@ -505,7 +505,7 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mItemListener.onTaskClick(medication);
+                    mItemListener.onMedicationClick(medication);
                 }
             });
 
@@ -515,11 +515,11 @@ public class MedicationsFragment extends Fragment implements MedicationsContract
 
     public interface TaskItemListener {
 
-        void onTaskClick(Medication clickedMedication);
+        void onMedicationClick(Medication clickedMedication);
 
-        void onCompleteTaskClick(Medication completedMedication);
+        void onCompleteMedicationClick(Medication completedMedication);
 
-        void onActivateTaskClick(Medication activatedMedication);
+        void onActivateMedicationClick(Medication activatedMedication);
     }
 
 }

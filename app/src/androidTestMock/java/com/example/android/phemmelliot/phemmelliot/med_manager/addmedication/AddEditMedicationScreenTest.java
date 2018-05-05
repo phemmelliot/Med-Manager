@@ -146,7 +146,7 @@ public class AddEditMedicationScreenTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation()
                 .getTargetContext(), AddMedicationActivity.class);
 
-        intent.putExtra(AddMedicationFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+        intent.putExtra(AddMedicationFragment.ARGUMENT_EDIT_MEDICATION_ID, taskId);
         mActivityTestRule.launchActivity(intent);
     }
 

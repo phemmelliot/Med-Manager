@@ -104,7 +104,7 @@ public class MedicationsRemoteDataSource implements MedicationsDataSource {
     public void completeMessage(@NonNull Medication medication) {
         Medication completedMedication = new Medication(medication.getTitle(), medication.getDescription(),
                 medication.getFrequency(), medication.getStart(), medication.getEnd(),
-                medication.getId(), true);
+                startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midHour, midMinute, endHour, endMinute, medication.getId(), true);
         TASKS_SERVICE_DATA.put(medication.getId(), completedMedication);
     }
 
@@ -117,7 +117,7 @@ public class MedicationsRemoteDataSource implements MedicationsDataSource {
     @Override
     public void activateMessage(@NonNull Medication medication) {
         Medication activeMedication = new Medication(medication.getTitle(), medication.getDescription(),
-                medication.getFrequency(), medication.getStart(), medication.getEnd(), medication.getId());
+                medication.getFrequency(), medication.getStart(), medication.getEnd(), startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midhour, midMinute, endHour, endMinute, medication.getId());
         TASKS_SERVICE_DATA.put(medication.getId(), activeMedication);
     }
 

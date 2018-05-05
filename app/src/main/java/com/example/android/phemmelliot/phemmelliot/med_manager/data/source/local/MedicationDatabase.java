@@ -24,6 +24,7 @@ import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 
 import com.example.android.phemmelliot.phemmelliot.med_manager.data.Medication;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * The Room Database that contains the Medication table.
@@ -38,11 +39,17 @@ public abstract class MedicationDatabase extends RoomDatabase {
     private static final Object sLock = new Object();
 
     public static MedicationDatabase getInstance(Context context) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userId;
+        if(mAuth.getCurrentUser() != null)
+            userId = mAuth.getCurrentUser().getUid();
+        else
+            userId = "Medications.db";
         synchronized (sLock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                        MedicationDatabase.class, "Medications.db")
-//                        .fallbackToDestructiveMigration()
+                        MedicationDatabase.class, userId)
+                        .fallbackToDestructiveMigration()
                         .build();
             }
             return INSTANCE;

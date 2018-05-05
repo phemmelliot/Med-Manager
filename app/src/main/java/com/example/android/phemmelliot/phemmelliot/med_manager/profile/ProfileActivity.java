@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private EditText mFirstNameEditText, mLastNameEditText, mUserNameEditText;
     private CoordinatorLayout coordinatorLayout;
-    private FirebaseDatabase mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity{
 
         //setting up Firebase
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         mDatabaseRef = mDatabase.getReference("users");
 
         //checking for users action with the editText

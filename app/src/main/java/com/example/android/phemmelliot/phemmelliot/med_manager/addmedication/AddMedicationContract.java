@@ -30,12 +30,26 @@ public interface AddMedicationContract {
 
         void setEndDate(String endDate);
 
+        void showToast(String memberOfDate);
+
         boolean isActive();
+
+        void showTimeToast();
+
+        void showImpossibleDateToast(String s);
+
+        void setStartTime(int startHour, int startMinute);
+
+        void setMidTime(int midHour, int midMinute);
+
+        void setEndTime(int endHour, int endMinute);
     }
 
     interface Presenter extends BasePresenter {
 
-        void saveTask(String title, String description, String frequency, String start, String end);
+        void saveTask(String title, String description, String frequency, String start, String end,
+        int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear, int startHour,
+                      int startMinute, int midHour, int midMinute, int endHour, int endMinute);
 
         void populateMedication();
 
@@ -43,7 +57,7 @@ public interface AddMedicationContract {
 
         void onClickDate(Context context, String editText);
 
-        void onClickTime(Context context, String editText);
+        void onClickTime(Context context, String editText, int position);
 
         boolean isDataMissing();
     }

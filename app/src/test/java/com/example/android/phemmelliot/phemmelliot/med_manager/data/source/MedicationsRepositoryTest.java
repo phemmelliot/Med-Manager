@@ -126,7 +126,7 @@ public class MedicationsRepositoryTest {
         // Then the service API and persistent repository are called and the cache is updated
         verify(mTasksRemoteDataSource).saveMessage(newMedication);
         verify(mTasksLocalDataSource).saveMessage(newMedication);
-        assertThat(mTasksRepository.mCachedTasks.size(), is(1));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(1));
     }
 
     @Test
@@ -141,8 +141,8 @@ public class MedicationsRepositoryTest {
         // Then the service API and persistent repository are called and the cache is updated
         verify(mTasksRemoteDataSource).completeMessage(newMedication);
         verify(mTasksLocalDataSource).completeMessage(newMedication);
-        assertThat(mTasksRepository.mCachedTasks.size(), is(1));
-        assertThat(mTasksRepository.mCachedTasks.get(newMedication.getId()).isActive(), is(false));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(1));
+        assertThat(mTasksRepository.mCachedMedications.get(newMedication.getId()).isActive(), is(false));
     }
 
     @Test
@@ -157,8 +157,8 @@ public class MedicationsRepositoryTest {
         // Then the service API and persistent repository are called and the cache is updated
         verify(mTasksRemoteDataSource).completeMessage(newMedication);
         verify(mTasksLocalDataSource).completeMessage(newMedication);
-        assertThat(mTasksRepository.mCachedTasks.size(), is(1));
-        assertThat(mTasksRepository.mCachedTasks.get(newMedication.getId()).isActive(), is(false));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(1));
+        assertThat(mTasksRepository.mCachedMedications.get(newMedication.getId()).isActive(), is(false));
     }
 
     @Test
@@ -173,8 +173,8 @@ public class MedicationsRepositoryTest {
         // Then the service API and persistent repository are called and the cache is updated
         verify(mTasksRemoteDataSource).activateMessage(newMedication);
         verify(mTasksLocalDataSource).activateMessage(newMedication);
-        assertThat(mTasksRepository.mCachedTasks.size(), is(1));
-        assertThat(mTasksRepository.mCachedTasks.get(newMedication.getId()).isActive(), is(true));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(1));
+        assertThat(mTasksRepository.mCachedMedications.get(newMedication.getId()).isActive(), is(true));
     }
 
     @Test
@@ -189,8 +189,8 @@ public class MedicationsRepositoryTest {
         // Then the service API and persistent repository are called and the cache is updated
         verify(mTasksRemoteDataSource).activateMessage(newMedication);
         verify(mTasksLocalDataSource).activateMessage(newMedication);
-        assertThat(mTasksRepository.mCachedTasks.size(), is(1));
-        assertThat(mTasksRepository.mCachedTasks.get(newMedication.getId()).isActive(), is(true));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(1));
+        assertThat(mTasksRepository.mCachedMedications.get(newMedication.getId()).isActive(), is(true));
     }
 
     @Test
@@ -221,9 +221,9 @@ public class MedicationsRepositoryTest {
         verify(mTasksRemoteDataSource).clearCompletedMessages();
         verify(mTasksLocalDataSource).clearCompletedMessages();
 
-        assertThat(mTasksRepository.mCachedTasks.size(), is(1));
-        assertTrue(mTasksRepository.mCachedTasks.get(newMedication2.getId()).isActive());
-        assertThat(mTasksRepository.mCachedTasks.get(newMedication2.getId()).getTitle(), is(TASK_TITLE2));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(1));
+        assertTrue(mTasksRepository.mCachedMedications.get(newMedication2.getId()).isActive());
+        assertThat(mTasksRepository.mCachedMedications.get(newMedication2.getId()).getTitle(), is(TASK_TITLE2));
     }
 
     @Test
@@ -243,7 +243,7 @@ public class MedicationsRepositoryTest {
         verify(mTasksRemoteDataSource).deleteAllMessages();
         verify(mTasksLocalDataSource).deleteAllMessages();
 
-        assertThat(mTasksRepository.mCachedTasks.size(), is(0));
+        assertThat(mTasksRepository.mCachedMedications.size(), is(0));
     }
 
     @Test
@@ -251,7 +251,7 @@ public class MedicationsRepositoryTest {
         // Given a task in the repository
         Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", true);
         mTasksRepository.saveMessage(newMedication);
-        assertThat(mTasksRepository.mCachedTasks.containsKey(newMedication.getId()), is(true));
+        assertThat(mTasksRepository.mCachedMedications.containsKey(newMedication.getId()), is(true));
 
         // When deleted
         mTasksRepository.deleteMessage(newMedication.getId());
@@ -261,7 +261,7 @@ public class MedicationsRepositoryTest {
         verify(mTasksLocalDataSource).deleteMessage(newMedication.getId());
 
         // Verify it's removed from repository
-        assertThat(mTasksRepository.mCachedTasks.containsKey(newMedication.getId()), is(false));
+        assertThat(mTasksRepository.mCachedMedications.containsKey(newMedication.getId()), is(false));
     }
 
     @Test

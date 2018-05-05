@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.phemmelliot.phemmelliot.med_manager.R;
 
@@ -26,7 +27,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class AddMedicationFragment extends Fragment implements AddMedicationContract.View {
 
-    public static final String ARGUMENT_EDIT_TASK_ID = "EDIT_TASK_ID";
+    public static final String ARGUMENT_EDIT_MEDICATION_ID = "EDIT_TASK_ID";
 
     private AddMedicationContract.Presenter mPresenter;
 
@@ -37,6 +38,30 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
     private Spinner mFrequencySpinner;
 
     private EditText mStart, mEnd, mStartTime, mEndTime, mMidTime;
+
+    private int startDay = 2000;
+
+    private int startMonth = 2000;
+
+    private int startYear = 2000;
+
+    private int endDay = 2000;
+
+    private int endMonth = 2000;
+
+    private int endYear = 2000;
+
+    private int startHour = 2000;
+
+    private int startMinute = 2000;
+
+    private int midHour = 2000;
+
+    private int midMinute = 2000;
+
+    private int endHour = 2000;
+
+    private int endMinute = 2000;
 
     public static AddMedicationFragment newInstance() {
         return new AddMedicationFragment();
@@ -72,7 +97,8 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
                 String startDate = mStart.getText().toString();
                 String endDate = mEnd.getText().toString();
                 mPresenter.saveTask(mTitle.getText().toString(), mDescription.getText().toString(), frequency,
-                        startDate,endDate);
+                        startDate,endDate, startDay, startMonth, startYear, endDay, endMonth, endYear, startHour,
+                        startMinute, midHour, midMinute, endHour, endMinute);
             }
         });
     }
@@ -112,14 +138,19 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 1){
                     mEndTime.setVisibility(View.VISIBLE);
-                    clickStartTime();
-                    clickEndTime();
+                    mMidTime.setVisibility(View.INVISIBLE);
+                    clickStartTime(position);
+                    clickEndTime(position);
                 }else if(position == 2){
                     mEndTime.setVisibility(View.VISIBLE);
                     mMidTime.setVisibility(View.VISIBLE);
-                    clickEndTime();
-                    clickStartTime();
-                    clickMidTime();
+                    clickEndTime(position);
+                    clickStartTime(position);
+                    clickMidTime(position);
+                }else if(position == 0){
+                    mEndTime.setVisibility(View.INVISIBLE);
+                    mMidTime.setVisibility(View.INVISIBLE);
+                    clickStartTime(position);
                 }
             }
 
@@ -132,29 +163,29 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
         return root;
     }
 
-    private void clickStartTime(){
+    private void clickStartTime(final int position){
         mStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.onClickTime(getContext(), "startTime");
+                mPresenter.onClickTime(getContext(), "startTime", position);
             }
         });
     }
 
-    private void clickEndTime(){
-        mEndTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.onClickTime(getContext(), "endTime");
-            }
-        });
+    private void clickEndTime(final int position){
+                mEndTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.onClickTime(getContext(), "endTime", position);
+                    }
+                });
     }
 
-    private void clickMidTime(){
+    private void clickMidTime(final int position){
         mMidTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.onClickTime(getContext(), "midTime");
+                mPresenter.onClickTime(getContext(), "midTime", position);
             }
         });
     }
@@ -189,6 +220,36 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
     }
 
     @Override
+    public void setStartTime(int startHour, int startMinute) {
+        if(startHour != 2000) {
+            if (startMinute == 0)
+                mStartTime.setText(String.format(Locale.US, "%d : %d0", startHour, startMinute));
+            else
+                mStartTime.setText(String.format(Locale.US, "%d : %d", startHour, startMinute));
+        }
+    }
+
+    @Override
+    public void setMidTime(int midHour, int midMinute) {
+        if(midHour != 2000) {
+            if (midMinute == 0)
+                mMidTime.setText(String.format(Locale.US, "%d : %d0", midHour, midMinute));
+            else
+                mMidTime.setText(String.format(Locale.US, "%d : %d", midHour, midMinute));
+        }
+    }
+
+    @Override
+    public void setEndTime(int endHour, int endMinute) {
+        if(endHour != 2000) {
+            if (endMinute == 0)
+                mEndTime.setText(String.format(Locale.US, "%d : %d0", endHour, endMinute));
+            else
+                mEndTime.setText(String.format(Locale.US, "%d : %d", endHour, endMinute));
+        }
+    }
+
+    @Override
     public void setStartDate(String startDate) {
           mStart.setText(startDate);
     }
@@ -199,24 +260,62 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
     }
 
     @Override
+    public void showToast(String memberOfDate) {
+        Toast.makeText(getContext(), memberOfDate + " can't be lower than current date", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTimeToast() {
+        Toast.makeText(getContext(), "Interval between intake should be atleast 8 hours", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showImpossibleDateToast(String s) {
+        Toast.makeText(getContext(), s + " can't be lower than the start date", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void setDate(String editText, int dayOfMonth, int month, int year) {
-        if(editText.equals("start"))
+        if(editText.equals("start")) {
+            startDay = dayOfMonth;
+            startMonth = month;
+            startYear = year;
             mStart.setText(String.format(Locale.US, "%d/%d/%d", dayOfMonth, month, year));
-        else if(editText.equals("end"))
+        }
+        else if(editText.equals("end")) {
+            endDay = dayOfMonth;
+            endMonth = month;
+            endYear = year;
             mEnd.setText(String.format(Locale.US, "%d/%d/%d", dayOfMonth, month, year));
+        }
     }
 
     @Override
     public void setTime(int hour, int minute, String editText) {
         switch (editText) {
             case "startTime":
-                mStartTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
+                startHour = hour;
+                startMinute = minute;
+                if(minute == 0)
+                    mStartTime.setText(String.format(Locale.US, "%d : %d0", hour, minute));
+                else
+                    mStartTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
                 break;
             case "endTime":
-                mEndTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
+                endHour = hour;
+                endMinute = minute;
+                if(minute == 0)
+                    mEndTime.setText(String.format(Locale.US, "%d : %d0", hour, minute));
+                else
+                    mEndTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
                 break;
             case "midTime":
-                mMidTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
+                midHour = hour;
+                midMinute = minute;
+                if(minute == 0)
+                    mMidTime.setText(String.format(Locale.US, "%d : %d0", hour, minute));
+                else
+                    mMidTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
                 break;
         }
 

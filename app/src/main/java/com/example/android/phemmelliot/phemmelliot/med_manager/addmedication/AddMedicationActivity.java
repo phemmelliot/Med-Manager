@@ -1,5 +1,6 @@
 package com.example.android.phemmelliot.phemmelliot.med_manager.addmedication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -26,6 +27,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
     private ActionBar mActionBar;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,22 +38,23 @@ public class AddMedicationActivity extends AppCompatActivity {
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mActionBar = getSupportActionBar();
+        assert mActionBar != null;
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setDisplayShowHomeEnabled(true);
 
         AddMedicationFragment addMedicationFragment = (AddMedicationFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
 
-        String taskId = getIntent().getStringExtra(AddMedicationFragment.ARGUMENT_EDIT_TASK_ID);
+        String taskId = getIntent().getStringExtra(AddMedicationFragment.ARGUMENT_EDIT_MEDICATION_ID);
 
         setToolbarTitle(taskId);
 
         if (addMedicationFragment == null) {
             addMedicationFragment = AddMedicationFragment.newInstance();
 
-            if (getIntent().hasExtra(AddMedicationFragment.ARGUMENT_EDIT_TASK_ID)) {
+            if (getIntent().hasExtra(AddMedicationFragment.ARGUMENT_EDIT_MEDICATION_ID)) {
                 Bundle bundle = new Bundle();
-                bundle.putString(AddMedicationFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+                bundle.putString(AddMedicationFragment.ARGUMENT_EDIT_MEDICATION_ID, taskId);
                 addMedicationFragment.setArguments(bundle);
             }
 
@@ -72,6 +76,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                 Injection.provideTasksRepository(getApplicationContext()),
                 addMedicationFragment,
                 shouldLoadDataFromRepo);
+
+        sharedPreferences = getSharedPreferences("ADD_MED", MODE_PRIVATE);
     }
 
     private void setToolbarTitle(@Nullable String taskId) {
@@ -93,6 +99,12 @@ public class AddMedicationActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        sharedPreferences.edit().clear().apply();
     }
 
     @VisibleForTesting

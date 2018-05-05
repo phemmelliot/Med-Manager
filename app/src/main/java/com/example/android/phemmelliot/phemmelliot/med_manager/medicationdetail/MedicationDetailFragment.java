@@ -163,7 +163,7 @@ public class MedicationDetailFragment extends Fragment implements MedicationDeta
     @Override
     public void showEditTask(@NonNull String taskId) {
         Intent intent = new Intent(getContext(), AddMedicationActivity.class);
-        intent.putExtra(AddMedicationFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+        intent.putExtra(AddMedicationFragment.ARGUMENT_EDIT_MEDICATION_ID, taskId);
         startActivityForResult(intent, REQUEST_EDIT_TASK);
     }
 
