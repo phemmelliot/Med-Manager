@@ -26,9 +26,9 @@ public interface AddMedicationContract {
 
         void setFrequency(String frequency);
 
-        void setStartDate(String startDate);
+        void setStartDate(String startDate, int startDay, int startMonth, int startYear);
 
-        void setEndDate(String endDate);
+        void setEndDate(String endDate, int endDay, int endMonth, int endYear);
 
         void showToast(String memberOfDate);
 
@@ -43,6 +43,12 @@ public interface AddMedicationContract {
         void setMidTime(int midHour, int midMinute);
 
         void setEndTime(int endHour, int endMinute);
+
+        int[] getStartDate();
+
+        int getStartTime();
+
+        int getMidTime();
     }
 
     interface Presenter extends BasePresenter {

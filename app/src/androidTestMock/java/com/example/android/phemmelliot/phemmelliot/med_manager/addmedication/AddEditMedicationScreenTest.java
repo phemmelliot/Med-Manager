@@ -126,7 +126,8 @@ public class AddEditMedicationScreenTest {
     public void toolbarTitle_editTask_persistsRotation() {
         // Put a task in the repository and start the activity to edit it
         MedicationsRepository.destroyInstance();
-        FakeMedicationsRemoteDataSource.getInstance().addTasks(new Medication("Title1", "", TASK_ID, false));
+        FakeMedicationsRemoteDataSource.getInstance().addTasks(new Medication("Title1", "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, TASK_ID, false));
         launchNewTaskActivity(TASK_ID);
 
         // Check that the toolbar shows the correct title

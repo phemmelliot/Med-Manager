@@ -64,7 +64,10 @@ public class FakeMedicationsRemoteDataSource implements MedicationsDataSource {
     @Override
     public void completeMessage(@NonNull Medication medication) {
         Medication completedMedication = new Medication(medication.getTitle(), medication.getDescription(),medication.getFrequency(), medication.getStart(),
-                medication.getEnd(), startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midHour, midMinute, endHour, endMinute, medication.getId(), true);
+                medication.getEnd(),medication.getStartDay(), medication.getStartMonth(), medication.getStartYear(),
+                medication.getEndDay(), medication.getEndMonth(), medication.getEndYear(), medication.getStartHour(),
+                medication.getStartMinute(), medication.getMidHour(), medication.getMidMinute(), medication.getEndHour(),
+                medication.getEndMinute(), medication.getId(), true);
         TASKS_SERVICE_DATA.put(medication.getId(), completedMedication);
     }
 
@@ -76,7 +79,10 @@ public class FakeMedicationsRemoteDataSource implements MedicationsDataSource {
     @Override
     public void activateMessage(@NonNull Medication medication) {
         Medication activeMedication = new Medication(medication.getTitle(), medication.getDescription(), medication.getFrequency(),
-                medication.getStart(), medication.getEnd(), startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midhour, midMinute, endHour, endMinute, medication.getId());
+                medication.getStart(), medication.getEnd(),medication.getStartDay(), medication.getStartMonth(), medication.getStartYear(),
+                medication.getEndDay(), medication.getEndMonth(), medication.getEndYear(), medication.getStartHour(),
+                medication.getStartMinute(), medication.getMidHour(), medication.getMidMinute(), medication.getEndHour(),
+                medication.getEndMinute(), medication.getId());
         TASKS_SERVICE_DATA.put(medication.getId(), activeMedication);
     }
 

@@ -45,9 +45,11 @@ public class MedicationDetailPresenterTest {
 
     public static final String INVALID_TASK_ID = "";
 
-    public static final Medication ACTIVE_MEDICATION = new Medication(TITLE_TEST, DESCRIPTION_TEST);
+    public static final Medication ACTIVE_MEDICATION = new Medication(TITLE_TEST, DESCRIPTION_TEST, "3", "22/22/2016",
+            "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
-    public static final Medication COMPLETED_MEDICATION = new Medication(TITLE_TEST, DESCRIPTION_TEST, true);
+    public static final Medication COMPLETED_MEDICATION = new Medication(TITLE_TEST, DESCRIPTION_TEST, "3", "22/22/2016",
+            "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
 
     @Mock
     private MedicationsRepository mTasksRepository;
@@ -142,7 +144,8 @@ public class MedicationDetailPresenterTest {
     @Test
     public void deleteTask() {
         // Given an initialized MedicationDetailPresenter with stubbed medication
-        Medication medication = new Medication(TITLE_TEST, DESCRIPTION_TEST);
+        Medication medication = new Medication(TITLE_TEST, DESCRIPTION_TEST, "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // When the deletion of a medication is requested
         mMedicationDetailPresenter = new MedicationDetailPresenter(
@@ -157,7 +160,8 @@ public class MedicationDetailPresenterTest {
     @Test
     public void completeTask() {
         // Given an initialized presenter with an active medication
-        Medication medication = new Medication(TITLE_TEST, DESCRIPTION_TEST);
+        Medication medication = new Medication(TITLE_TEST, DESCRIPTION_TEST, "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mMedicationDetailPresenter = new MedicationDetailPresenter(
                 medication.getId(), mTasksRepository, mTaskDetailView);
         mMedicationDetailPresenter.start();
@@ -173,7 +177,8 @@ public class MedicationDetailPresenterTest {
     @Test
     public void activateTask() {
         // Given an initialized presenter with a completed medication
-        Medication medication = new Medication(TITLE_TEST, DESCRIPTION_TEST, true);
+        Medication medication = new Medication(TITLE_TEST, DESCRIPTION_TEST, "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mMedicationDetailPresenter = new MedicationDetailPresenter(
                 medication.getId(), mTasksRepository, mTaskDetailView);
         mMedicationDetailPresenter.start();

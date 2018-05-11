@@ -49,8 +49,10 @@ public class MedicationsRepositoryTest {
 
     private final static String TASK_TITLE3 = "title3";
 
-    private static List<Medication> Medications = Lists.newArrayList(new Medication("Title1", "Description1"),
-            new Medication("Title2", "Description2"));
+    private static List<Medication> Medications = Lists.newArrayList(new Medication("Title1", "Description1", "3", "22/22/2016",
+                    "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0),
+            new Medication("Title2", "Description2", "3", "22/22/2016",
+                    "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0));
 
     private MedicationsRepository mTasksRepository;
 
@@ -118,7 +120,8 @@ public class MedicationsRepositoryTest {
     @Test
     public void saveTask_savesTaskToServiceAPI() {
         // Given a stub task with title and description
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description");
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // When a task is saved to the medications repository
         mTasksRepository.saveMessage(newMedication);
@@ -132,7 +135,8 @@ public class MedicationsRepositoryTest {
     @Test
     public void completeTask_completesTaskToServiceAPIUpdatesCache() {
         // Given a stub active task with title and description added in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description");
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mTasksRepository.saveMessage(newMedication);
 
         // When a task is completed to the medications repository
@@ -148,7 +152,8 @@ public class MedicationsRepositoryTest {
     @Test
     public void completeTaskId_completesTaskToServiceAPIUpdatesCache() {
         // Given a stub active task with title and description added in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description");
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mTasksRepository.saveMessage(newMedication);
 
         // When a task is completed using its id to the medications repository
@@ -164,7 +169,8 @@ public class MedicationsRepositoryTest {
     @Test
     public void activateTask_activatesTaskToServiceAPIUpdatesCache() {
         // Given a stub completed task with title and description in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", true);
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description","3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication);
 
         // When a completed task is activated to the medications repository
@@ -180,7 +186,8 @@ public class MedicationsRepositoryTest {
     @Test
     public void activateTaskId_activatesTaskToServiceAPIUpdatesCache() {
         // Given a stub completed task with title and description in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", true);
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication);
 
         // When a completed task is activated with its id to the medications repository
@@ -206,11 +213,14 @@ public class MedicationsRepositoryTest {
     @Test
     public void deleteCompletedTasks_deleteCompletedTasksToServiceAPIUpdatesCache() {
         // Given 2 stub completed medications and 1 stub active medications in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", true);
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication);
-        Medication newMedication2 = new Medication(TASK_TITLE2, "Some Medication Description");
+        Medication newMedication2 = new Medication(TASK_TITLE2, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mTasksRepository.saveMessage(newMedication2);
-        Medication newMedication3 = new Medication(TASK_TITLE3, "Some Medication Description", true);
+        Medication newMedication3 = new Medication(TASK_TITLE3, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication3);
 
         // When a completed medications are cleared to the medications repository
@@ -229,11 +239,14 @@ public class MedicationsRepositoryTest {
     @Test
     public void deleteAllTasks_deleteTasksToServiceAPIUpdatesCache() {
         // Given 2 stub completed medications and 1 stub active medications in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", true);
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication);
-        Medication newMedication2 = new Medication(TASK_TITLE2, "Some Medication Description");
+        Medication newMedication2 = new Medication(TASK_TITLE2, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mTasksRepository.saveMessage(newMedication2);
-        Medication newMedication3 = new Medication(TASK_TITLE3, "Some Medication Description", true);
+        Medication newMedication3 = new Medication(TASK_TITLE3, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication3);
 
         // When all medications are deleted to the medications repository
@@ -249,7 +262,8 @@ public class MedicationsRepositoryTest {
     @Test
     public void deleteTask_deleteTaskToServiceAPIRemovedFromCache() {
         // Given a task in the repository
-        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", true);
+        Medication newMedication = new Medication(TASK_TITLE, "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mTasksRepository.saveMessage(newMedication);
         assertThat(mTasksRepository.mCachedMedications.containsKey(newMedication.getId()), is(true));
 

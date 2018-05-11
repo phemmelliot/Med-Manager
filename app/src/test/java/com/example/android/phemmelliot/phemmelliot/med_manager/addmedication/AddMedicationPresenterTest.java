@@ -81,7 +81,8 @@ public class AddMedicationPresenterTest {
                 null, mTasksRepository, mAddEditTaskView, true);
 
         // When the presenter is asked to save a task
-        mAddMedicationPresenter.saveTask("New Medication Title", "Some Medication Description");
+        mAddMedicationPresenter.saveTask("New Medication Title", "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // Then a task is saved in the repository and the view updated
         verify(mTasksRepository).saveMessage(any(Medication.class)); // saved to the model
@@ -95,7 +96,8 @@ public class AddMedicationPresenterTest {
                 null, mTasksRepository, mAddEditTaskView, true);
 
         // When the presenter is asked to save an empty task
-        mAddMedicationPresenter.saveTask("", "");
+        mAddMedicationPresenter.saveTask("", "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // Then an empty not error is shown in the UI
         verify(mAddEditTaskView).showEmptyMedicationError();
@@ -108,7 +110,8 @@ public class AddMedicationPresenterTest {
                 "1", mTasksRepository, mAddEditTaskView, true);
 
         // When the presenter is asked to save an existing task
-        mAddMedicationPresenter.saveTask("Existing Medication Title", "Some Medication Description");
+        mAddMedicationPresenter.saveTask("Existing Medication Title", "Some Medication Description", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // Then a task is saved in the repository and the view updated
         verify(mTasksRepository).saveMessage(any(Medication.class)); // saved to the model
@@ -117,7 +120,8 @@ public class AddMedicationPresenterTest {
 
     @Test
     public void populateTask_callsRepoAndUpdatesView() {
-        Medication testMedication = new Medication("TITLE", "DESCRIPTION");
+        Medication testMedication = new Medication("TITLE", "DESCRIPTION", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         // Get a reference to the class under test
         mAddMedicationPresenter = new AddMedicationPresenter(testMedication.getId(),
                 mTasksRepository, mAddEditTaskView, true);

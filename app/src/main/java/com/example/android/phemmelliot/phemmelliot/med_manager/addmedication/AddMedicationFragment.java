@@ -221,42 +221,123 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
 
     @Override
     public void setStartTime(int startHour, int startMinute) {
-        if(startHour != 2000) {
-            if (startMinute == 0)
-                mStartTime.setText(String.format(Locale.US, "%d : %d0", startHour, startMinute));
-            else
-                mStartTime.setText(String.format(Locale.US, "%d : %d", startHour, startMinute));
-        }
+//        Toast.makeText(getContext(), startHour, Toast.LENGTH_LONG).show();
+        this.startHour = startHour;
+        int hourToShow = hourOfDay(startHour);
+        String morningOrEvening = timeOfDay(startHour);
+        this.startMinute = startMinute;
+        if(startMinute == 0)
+            mStartTime.setText(String.format(Locale.US, "%d : %d0" + morningOrEvening, hourToShow, startMinute));
+        else
+            mStartTime.setText(String.format(Locale.US, "%d : %d" + morningOrEvening, hourToShow, startMinute));
+//        if(startHour != 2000) {
+//            if (startMinute == 0) {
+//                String morningOrEvening = timeOfDay(startHour);
+//                this.startHour = startHour;
+//                this.startMinute = startMinute;
+//                mStartTime.setText(String.format(Locale.US, "%d:%d0%s", startHour, startMinute, morningOrEvening));
+//            }
+//            else {
+//                String morningOrEvening = timeOfDay(startHour);
+//                this.startHour = startHour;
+//                this.startMinute = startMinute;
+//                mStartTime.setText(String.format(Locale.US, "%d:%d%s", startHour, startMinute, morningOrEvening));
+//            }
+//        }
     }
 
     @Override
     public void setMidTime(int midHour, int midMinute) {
-        if(midHour != 2000) {
-            if (midMinute == 0)
-                mMidTime.setText(String.format(Locale.US, "%d : %d0", midHour, midMinute));
-            else
-                mMidTime.setText(String.format(Locale.US, "%d : %d", midHour, midMinute));
-        }
+      //  Toast.makeText(getContext(), midHour, Toast.LENGTH_LONG).show();
+        this.midHour =  midHour;
+        int hourToShow = hourOfDay(midHour);
+        String morningOrEvening = timeOfDay(midHour);
+        this.midMinute = midMinute;
+        if(midMinute == 0)
+            mMidTime.setText(String.format(Locale.US, "%d : %d0" + morningOrEvening, hourToShow, midMinute));
+        else
+            mMidTime.setText(String.format(Locale.US, "%d : %d" + morningOrEvening, hourToShow, midMinute));
     }
 
     @Override
     public void setEndTime(int endHour, int endMinute) {
+       // Toast.makeText(getContext(), endHour, Toast.LENGTH_LONG).show();
         if(endHour != 2000) {
-            if (endMinute == 0)
-                mEndTime.setText(String.format(Locale.US, "%d : %d0", endHour, endMinute));
-            else
-                mEndTime.setText(String.format(Locale.US, "%d : %d", endHour, endMinute));
+                this.endHour = endHour;
+                int hourToShow = hourOfDay(endHour);
+                String morningOrEvening = timeOfDay(endHour);
+                this.endMinute = endMinute;
+                if(endMinute == 0)
+                    mEndTime.setText(String.format(Locale.US, "%d : %d0" + morningOrEvening, hourToShow, endMinute));
+                else
+                    mEndTime.setText(String.format(Locale.US, "%d : %d" + morningOrEvening, hourToShow, endMinute));
+            }
+    }
+
+    @Override
+    public int[] getStartDate() {
+        String startDate = mStart.getText().toString();
+        int[] date = {0,0,0};
+        if(startDate.contentEquals("")){
+            return date;
+        }else{
+            if(startDate.charAt(1) == '|'){
+                date[0] = Integer.parseInt(String.valueOf(startDate.charAt(0)));
+                if(startDate.charAt(3) == '|') {
+                    date[1] = Integer.parseInt(String.valueOf(startDate.charAt(2)));
+                    date[2] = Integer.parseInt(startDate.substring(4));
+                }
+                else if(startDate.charAt(4) == '|') {
+                    date[1] = Integer.parseInt(startDate.substring(2, 4));
+                    date[2] = Integer.parseInt(startDate.substring(5));
+                }
+            }else if(startDate.charAt(2) == '|'){
+               date[0] = Integer.parseInt(startDate.substring(0,2));
+                if(startDate.charAt(4) == '|') {
+                    date[1] = Integer.parseInt(String.valueOf(startDate.charAt(3)));
+                    date[2] = Integer.parseInt(startDate.substring(5));
+                }
+                else if(startDate.charAt(5) == '|') {
+                    date[1] = Integer.parseInt(startDate.substring(3, 5));
+                    date[2] = Integer.parseInt(startDate.substring(6));
+                }
+            }
+
+            return date;
         }
     }
 
     @Override
-    public void setStartDate(String startDate) {
-          mStart.setText(startDate);
+    public int getStartTime() {
+        if(mStartTime.getText().toString().equals("") || mStartTime.getText()==null) {
+            return 2000;
+        }
+        else
+            return (startHour * 60) + startMinute;
     }
 
     @Override
-    public void setEndDate(String endDate) {
-         mEnd.setText(endDate);
+    public int getMidTime() {
+        if(mMidTime.getText().toString().equals("") || mMidTime.getText() == null)
+            return 2000;
+        else
+            return (midHour * 60) + midMinute;
+    }
+
+    @Override
+    public void setStartDate(String startDate, int startDay, int startMonth, int startYear) {
+        this.startDay = startDay;
+        this.startMonth = startMonth;
+        this.startYear = startYear;
+        mStart.setText(startDate);
+    }
+
+    @Override
+    public void setEndDate(String endDate, int endDay, int endMonth, int endYear) {
+        this.endDay = endDay;
+        this.endMonth = endMonth;
+        this.endYear = endYear;
+        mEnd.setText(endDate);
     }
 
     @Override
@@ -280,13 +361,13 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
             startDay = dayOfMonth;
             startMonth = month;
             startYear = year;
-            mStart.setText(String.format(Locale.US, "%d/%d/%d", dayOfMonth, month, year));
+            mStart.setText(String.format(Locale.US, "%d|%d|%d", dayOfMonth, month, year));
         }
         else if(editText.equals("end")) {
             endDay = dayOfMonth;
             endMonth = month;
             endYear = year;
-            mEnd.setText(String.format(Locale.US, "%d/%d/%d", dayOfMonth, month, year));
+            mEnd.setText(String.format(Locale.US, "%d|%d|%d", dayOfMonth, month, year));
         }
     }
 
@@ -295,30 +376,62 @@ public class AddMedicationFragment extends Fragment implements AddMedicationCont
         switch (editText) {
             case "startTime":
                 startHour = hour;
+                int hourToShow = hourOfDay(hour);
+                String morningOrEvening = timeOfDay(hour);
                 startMinute = minute;
                 if(minute == 0)
-                    mStartTime.setText(String.format(Locale.US, "%d : %d0", hour, minute));
+                    mStartTime.setText(String.format(Locale.US, "%d : %d0" + morningOrEvening, hourToShow, minute));
                 else
-                    mStartTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
+                    mStartTime.setText(String.format(Locale.US, "%d : %d" + morningOrEvening, hourToShow, minute));
                 break;
             case "endTime":
                 endHour = hour;
+                hourToShow = hourOfDay(hour);
+                morningOrEvening = timeOfDay(hour);
                 endMinute = minute;
                 if(minute == 0)
-                    mEndTime.setText(String.format(Locale.US, "%d : %d0", hour, minute));
+                    mEndTime.setText(String.format(Locale.US, "%d : %d0" + morningOrEvening, hourToShow, minute));
                 else
-                    mEndTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
+                    mEndTime.setText(String.format(Locale.US, "%d : %d" + morningOrEvening, hourToShow, minute));
                 break;
             case "midTime":
                 midHour = hour;
+                hourToShow = hourOfDay(hour);
+                morningOrEvening = timeOfDay(hour);
                 midMinute = minute;
                 if(minute == 0)
-                    mMidTime.setText(String.format(Locale.US, "%d : %d0", hour, minute));
+                    mMidTime.setText(String.format(Locale.US, "%d : %d0" + morningOrEvening, hourToShow, minute));
                 else
-                    mMidTime.setText(String.format(Locale.US, "%d : %d", hour, minute));
+                    mMidTime.setText(String.format(Locale.US, "%d : %d" + morningOrEvening, hourToShow, minute));
                 break;
         }
 
+    }
+
+    private String timeOfDay(int startHour) {
+        String nightOrDay = "";
+        if(startHour>=12 && startHour != 24) {
+            nightOrDay = "PM";
+        }
+        else if(startHour <= 12 || startHour == 24)
+            nightOrDay = "AM";
+
+        return nightOrDay;
+    }
+
+    private int hourOfDay(int startHour){
+        int hour = 0;
+        if(startHour>=12 && startHour != 0) {
+            hour = startHour - 12;
+        }
+        else if(startHour < 12 || startHour == 0) {
+            if(startHour == 0)
+                hour = 12;
+            else
+                hour = startHour;
+        }
+
+        return hour;
     }
 
     @Override

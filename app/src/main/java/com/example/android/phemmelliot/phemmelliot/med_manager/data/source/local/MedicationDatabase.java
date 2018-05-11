@@ -49,7 +49,7 @@ public abstract class MedicationDatabase extends RoomDatabase {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         MedicationDatabase.class, userId)
-                        .fallbackToDestructiveMigration()
+//                        .fallbackToDestructiveMigration()
                         .build();
             }
             return INSTANCE;

@@ -86,7 +86,8 @@ public class TasksLocalDataSourceTest {
     @Test
     public void saveTask_retrievesTask() {
         // Given a new task
-        final Medication newMedication = new Medication(TITLE, "");
+        final Medication newMedication = new Medication(TITLE, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // When saved into the persistent repository
         mLocalDataSource.saveMessage(newMedication);
@@ -110,7 +111,8 @@ public class TasksLocalDataSourceTest {
         // Initialize mock for the callback.
         MedicationsDataSource.GetMedicationsCallback callback = mock(MedicationsDataSource.GetMedicationsCallback.class);
         // Given a new task in the persistent repository
-        final Medication newMedication = new Medication(TITLE, "");
+        final Medication newMedication = new Medication(TITLE, "", "", "",
+                "",3,4,2018,4,5,2018,5,5,0,0,0,0,true);
         mLocalDataSource.saveMessage(newMedication);
 
         // When completed in the persistent repository
@@ -137,7 +139,8 @@ public class TasksLocalDataSourceTest {
         MedicationsDataSource.GetMedicationsCallback callback = mock(MedicationsDataSource.GetMedicationsCallback.class);
 
         // Given a new completed task in the persistent repository
-        final Medication newMedication = new Medication(TITLE, "");
+        final Medication newMedication = new Medication(TITLE, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication);
         mLocalDataSource.completeMessage(newMedication);
 
@@ -161,13 +164,16 @@ public class TasksLocalDataSourceTest {
         MedicationsDataSource.GetMedicationsCallback callback3 = mock(MedicationsDataSource.GetMedicationsCallback.class);
 
         // Given 2 new completed medications and 1 active task in the persistent repository
-        final Medication newMedication1 = new Medication(TITLE, "");
+        final Medication newMedication1 = new Medication(TITLE, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication1);
         mLocalDataSource.completeMessage(newMedication1);
-        final Medication newMedication2 = new Medication(TITLE2, "");
+        final Medication newMedication2 = new Medication(TITLE2, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication2);
         mLocalDataSource.completeMessage(newMedication2);
-        final Medication newMedication3 = new Medication(TITLE3, "");
+        final Medication newMedication3 = new Medication(TITLE3, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication3);
 
         // When completed medications are cleared in the repository
@@ -193,7 +199,8 @@ public class TasksLocalDataSourceTest {
     @Test
     public void deleteAllTasks_emptyListOfRetrievedTask() {
         // Given a new task in the persistent repository and a mocked callback
-        Medication newMedication = new Medication(TITLE, "");
+        Medication newMedication = new Medication(TITLE, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication);
         MedicationsDataSource.LoadMessagesCallback callback = mock(MedicationsDataSource.LoadMessagesCallback.class);
 
@@ -210,9 +217,11 @@ public class TasksLocalDataSourceTest {
     @Test
     public void getTasks_retrieveSavedTasks() {
         // Given 2 new medications in the persistent repository
-        final Medication newMedication1 = new Medication(TITLE, "");
+        final Medication newMedication1 = new Medication(TITLE, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication1);
-        final Medication newMedication2 = new Medication(TITLE, "");
+        final Medication newMedication2 = new Medication(TITLE, "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
         mLocalDataSource.saveMessage(newMedication2);
 
         // Then the medications can be retrieved from the persistent repository

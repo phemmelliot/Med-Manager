@@ -59,12 +59,14 @@ public class MedicationDetailScreenTest {
     /**
      * {@link Medication} stub that is added to the fake service API layer.
      */
-    private static Medication activeMedication = new Medication(TASK_TITLE, TASK_DESCRIPTION, false);
+    private static Medication activeMedication = new Medication(TASK_TITLE, TASK_DESCRIPTION, "3", "22/22/2016",
+            "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, false);
 
     /**
      * {@link Medication} stub that is added to the fake service API layer.
      */
-    private static Medication completedMedication = new Medication(TASK_TITLE, TASK_DESCRIPTION, true);
+    private static Medication completedMedication = new Medication(TASK_TITLE, TASK_DESCRIPTION, "3", "22/22/2016",
+            "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
 
     /**
      * {@link ActivityTestRule} is a JUnit {@link Rule @Rule} to launch your activity under test.

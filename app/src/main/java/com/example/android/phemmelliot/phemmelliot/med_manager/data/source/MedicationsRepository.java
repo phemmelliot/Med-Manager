@@ -143,10 +143,10 @@ public class MedicationsRepository implements MedicationsDataSource {
 
         Medication completedMedication = new Medication(medication.getTitle(), medication.getDescription(),
                 medication.getFrequency(), medication.getStart(),
-                medication.getEnd(),medication.getmStartDay(), medication.getmStartMonth(), medication.getmStartYear(),
-                medication.getmEndDay(), medication.getmEndMonth(), medication.getmEndYear(), medication.getmStartHour(),
-                medication.getmStartMinute(), medication.getmMidHour(), medication.getmMidMinute(), medication.getmEndHour(),
-                medication.getmEndMinute(), medication.getId(), true);
+                medication.getEnd(),medication.getStartDay(), medication.getStartMonth(), medication.getStartYear(),
+                medication.getEndDay(), medication.getEndMonth(), medication.getEndYear(), medication.getStartHour(),
+                medication.getStartMinute(), medication.getMidHour(), medication.getMidMinute(), medication.getEndHour(),
+                medication.getEndMinute(), medication.getId(), true);
 
         // Do in memory cache update to keep the app UI up to date
         if (mCachedMedications == null) {
@@ -169,10 +169,10 @@ public class MedicationsRepository implements MedicationsDataSource {
 
         Medication activeMedication = new Medication(medication.getTitle(), medication.getDescription(),
                 medication.getFrequency(), medication.getStart(),
-                medication.getEnd(),medication.getmStartDay(), medication.getmStartMonth(), medication.getmStartYear(),
-                medication.getmEndDay(), medication.getmEndMonth(), medication.getmEndYear(), medication.getmStartHour(),
-                medication.getmStartMinute(), medication.getmMidHour(), medication.getmMidMinute(), medication.getmEndHour(),
-                medication.getmEndMinute(), medication.getId());
+                medication.getEnd(),medication.getStartDay(), medication.getStartMonth(), medication.getStartYear(),
+                medication.getEndDay(), medication.getEndMonth(), medication.getEndYear(), medication.getStartHour(),
+                medication.getStartMinute(), medication.getMidHour(), medication.getMidMinute(), medication.getEndHour(),
+                medication.getEndMinute(), medication.getId());
 
         // Do in memory cache update to keep the app UI up to date
         if (mCachedMedications == null) {

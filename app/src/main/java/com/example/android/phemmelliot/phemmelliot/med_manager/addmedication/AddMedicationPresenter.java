@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -40,7 +41,6 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
 
     private int todaysDay, todaysMonth, todaysYear;
 
-    private SharedPreferences sharedPreferences;
 
     /**
      * Creates a presenter for the add/edit view.
@@ -99,7 +99,6 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
         new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                sharedPreferences = context.getSharedPreferences("ADD_MED", Context.MODE_PRIVATE);
                 if(year < todaysYear){
                     mAddMedicationView.showToast("Selected Year");
                 }else if(month < todaysMonth){
@@ -107,23 +106,23 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
                 }else if(dayOfMonth < todaysDay){
                     mAddMedicationView.showToast("Selected Day");
                 }else if(whichDate.equals("start")){
-                    sharedPreferences.edit().putInt("startDay", dayOfMonth)
-                            .putInt("startMonth", month)
-                            .putInt("startYear", year)
-                            .apply();
                     mAddMedicationView.setDate(whichDate, dayOfMonth, month, year);
                 }else if(whichDate.equals("end")){
-                    int minDay = sharedPreferences.getInt("startDay", 2000);
-                    int minMonth = sharedPreferences.getInt("startMonth", 2000);
-                    int minYear = sharedPreferences.getInt("startYear", 2000);
-
-                    if(year < minYear){
-                        mAddMedicationView.showImpossibleDateToast("Selected Year");
-                    }else if(month < minMonth){
-                        mAddMedicationView.showImpossibleDateToast("Selected Month");
-                    }else if(dayOfMonth < minDay) {
-                        mAddMedicationView.showImpossibleDateToast("Selected Day");
-                    }
+                    int[] date = mAddMedicationView.getStartDate();
+                    int minDay = date[0];
+                    int minMonth = date[1];
+                    int minYear = date[2];
+                    if(minDay != 0 && minMonth != 0 && minYear != 0){
+                        if(year < minYear){
+                            mAddMedicationView.showImpossibleDateToast("Selected Year");
+                        }else if(month < minMonth){
+                            mAddMedicationView.showImpossibleDateToast("Selected Month");
+                        }else if(dayOfMonth < minDay) {
+                            mAddMedicationView.showImpossibleDateToast("Selected Day");
+                        }else
+                            mAddMedicationView.setDate(whichDate, dayOfMonth, month, year);
+                    }else
+                        Toast.makeText(context, "Pick a starting date first", Toast.LENGTH_LONG).show();
                 }
             }
         }, myCalendar
@@ -133,16 +132,11 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
 
     @Override
     public void onClickTime(final Context context, final String whichTime, final int position) {
-        sharedPreferences = context.getSharedPreferences("ADD_MED", Context.MODE_PRIVATE);
         final int leastTimeDiff = 8 * 60;
         if (whichTime.equals("startTime")) {
             new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    int totalSelectedTime = (hourOfDay * 60) + minute;
-                    sharedPreferences.edit()
-                            .putInt(whichTime, totalSelectedTime)
-                            .apply();
                     mAddMedicationView.setTime(hourOfDay, minute, whichTime);
 
                 }
@@ -152,7 +146,7 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
 
 
         } else if (whichTime.equals("midTime")) {
-            final int startTime = sharedPreferences.getInt("startTime", 2000);
+            final int startTime = mAddMedicationView.getStartTime();
             if (startTime == 2000) {
                 Toast.makeText(context, "Pick time for morning intake first", Toast.LENGTH_LONG).show();
             } else {
@@ -160,14 +154,10 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         int totalSelectedTime = (hourOfDay * 60) + minute;
-                        sharedPreferences.edit()
-                                .putInt(whichTime, totalSelectedTime)
-                                .apply();
                         if (startTime + leastTimeDiff > totalSelectedTime) {
                             mAddMedicationView.showTimeToast();
-                        } else if (startTime + leastTimeDiff < totalSelectedTime) {
+                        } else if (startTime + leastTimeDiff <= totalSelectedTime) {
                             mAddMedicationView.setTime(hourOfDay, minute, whichTime);
-
                         }
                     }
                 }, myCalendar
@@ -177,11 +167,11 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
 
 
         } else if (whichTime.equals("endTime")) {
-            final int midTime = sharedPreferences.getInt("midTime", 2000);
+            final int midTime = mAddMedicationView.getMidTime();
             if (midTime == 2000 && position == 2) {
                 Toast.makeText(context, "Pick time for afternoon intake first", Toast.LENGTH_LONG).show();
             } else if (midTime == 2000 && position == 1) {
-                final int startTime = sharedPreferences.getInt("startTime", 2000);
+                final int startTime = mAddMedicationView.getStartTime();
                 if(startTime == 2000)
                     Toast.makeText(context, "Pick time for morning intake first", Toast.LENGTH_LONG).show();
                 else{
@@ -189,7 +179,6 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                             int totalSelectedTime = (hourOfDay * 60) + minute;
-                            mAddMedicationView.setTime(hourOfDay, minute, whichTime);
                             if (startTime + leastTimeDiff > totalSelectedTime) {
                                 mAddMedicationView.showTimeToast();
                             } else if (startTime + leastTimeDiff < totalSelectedTime) {
@@ -207,7 +196,6 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         int totalSelectedTime = (hourOfDay * 60) + minute;
-                        mAddMedicationView.setTime(hourOfDay, minute, whichTime);
                         if (midTime + leastTimeDiff > totalSelectedTime) {
                             mAddMedicationView.showTimeToast();
                         } else if (midTime + leastTimeDiff < totalSelectedTime) {
@@ -231,11 +219,12 @@ public class AddMedicationPresenter implements AddMedicationContract.Presenter,
             mAddMedicationView.setTitle(medication.getTitle());
             mAddMedicationView.setDescription(medication.getDescription());
             mAddMedicationView.setFrequency(medication.getFrequency());
-            mAddMedicationView.setStartDate(medication.getStart());
-            mAddMedicationView.setEndDate(medication.getEnd());
-            mAddMedicationView.setStartTime(medication.getmStartHour(), medication.getmStartMinute());
-            mAddMedicationView.setMidTime(medication.getmMidHour(), medication.getmMidMinute());
-            mAddMedicationView.setEndTime(medication.getmEndHour(), medication.getmMidMinute());
+            mAddMedicationView.setStartDate(medication.getStart(), medication.getStartDay(), medication.getStartMonth(), medication.getStartYear());
+            mAddMedicationView.setEndDate(medication.getEnd(), medication.getEndDay(), medication.getEndMonth(), medication.getEndYear());
+            mAddMedicationView.setStartTime(medication.getStartHour(), medication.getStartMinute());
+            mAddMedicationView.setMidTime(medication.getMidHour(), medication.getMidMinute());
+            mAddMedicationView.setEndTime(medication.getEndHour(), medication.getMidMinute());
+            Log.d("This Activity", ""+medication.getStartHour() + ", " + medication.getEndHour() + ", " + medication.getMidHour());
         }
         mIsDataMissing = false;
     }

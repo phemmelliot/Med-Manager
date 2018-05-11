@@ -73,8 +73,10 @@ public class StatisticsScreenTest {
     public void intentWithStubbedTaskId() {
         // Given some medications
         MedicationsRepository.destroyInstance();
-        FakeMedicationsRemoteDataSource.getInstance().addTasks(new Medication("Title1", "", false));
-        FakeMedicationsRemoteDataSource.getInstance().addTasks(new Medication("Title2", "", true));
+        FakeMedicationsRemoteDataSource.getInstance().addTasks(new Medication("Title1", "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, false));
+        FakeMedicationsRemoteDataSource.getInstance().addTasks(new Medication("Title2", "", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true));
 
         // Lazily start the Activity from the ActivityTestRule
         Intent startIntent = new Intent();

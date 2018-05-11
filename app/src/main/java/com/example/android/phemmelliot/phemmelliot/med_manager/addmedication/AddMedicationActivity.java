@@ -27,8 +27,6 @@ public class AddMedicationActivity extends AppCompatActivity {
 
     private ActionBar mActionBar;
 
-    private SharedPreferences sharedPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +74,6 @@ public class AddMedicationActivity extends AppCompatActivity {
                 Injection.provideTasksRepository(getApplicationContext()),
                 addMedicationFragment,
                 shouldLoadDataFromRepo);
-
-        sharedPreferences = getSharedPreferences("ADD_MED", MODE_PRIVATE);
     }
 
     private void setToolbarTitle(@Nullable String taskId) {
@@ -104,7 +100,6 @@ public class AddMedicationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        sharedPreferences.edit().clear().apply();
     }
 
     @VisibleForTesting

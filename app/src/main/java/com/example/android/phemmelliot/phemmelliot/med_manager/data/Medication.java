@@ -99,7 +99,7 @@ public final class Medication {
 
     /**
      * Use this constructor to create a new active Medication.
-     *  @param title       title of the medication
+     * @param title       title of the medication
      * @param description description of the medication
      * @param startDay   start day of the medication intake
      * @param startMonth  start month of the medication intake
@@ -252,51 +252,51 @@ public final class Medication {
         return mEnd;
     }
 
-    public int getmStartDay() {
+    public int getStartDay() {
         return mStartDay;
     }
 
-    public int getmStartMonth() {
+    public int getStartMonth() {
         return mStartMonth;
     }
 
-    public int getmStartYear() {
+    public int getStartYear() {
         return mStartYear;
     }
 
-    public int getmEndDay() {
+    public int getEndDay() {
         return mEndDay;
     }
 
-    public int getmEndMonth() {
+    public int getEndMonth() {
         return mEndMonth;
     }
 
-    public int getmEndYear() {
+    public int getEndYear() {
         return mEndYear;
     }
 
-    public int getmStartHour() {
+    public int getStartHour() {
         return mStartHour;
     }
 
-    public int getmStartMinute() {
+    public int getStartMinute() {
         return mStartMinute;
     }
 
-    public int getmMidHour() {
+    public int getMidHour() {
         return mMidHour;
     }
 
-    public int getmMidMinute() {
+    public int getMidMinute() {
         return mMidMinute;
     }
 
-    public int getmEndHour() {
+    public int getEndHour() {
         return mEndHour;
     }
 
-    public int getmEndMinute() {
+    public int getEndMinute() {
         return mEndMinute;
     }
 

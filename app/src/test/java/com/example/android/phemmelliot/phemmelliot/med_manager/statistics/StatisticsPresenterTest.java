@@ -69,8 +69,11 @@ public class StatisticsPresenterTest {
         when(mStatisticsView.isActive()).thenReturn(true);
 
         // We start the medications to 3, with one active and two completed
-        Medications = Lists.newArrayList(new Medication("Title1", "Description1"),
-                new Medication("Title2", "Description2", true), new Medication("Title3", "Description3", true));
+        Medications = Lists.newArrayList(new Medication("Title1", "Description1", "3", "22/22/2016",
+                        "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0),
+                new Medication("Title2", "Description2", "3", "22/22/2016",
+                        "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true), new Medication("Title3", "Description3", "3", "22/22/2016",
+                        "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true));
     }
 
     @Test

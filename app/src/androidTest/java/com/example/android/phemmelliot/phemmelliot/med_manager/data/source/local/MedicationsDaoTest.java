@@ -1,18 +1,4 @@
-/*
- * Copyright 2017, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.example.android.phemmelliot.phemmelliot.med_manager.data.source.local;
 
@@ -36,7 +22,8 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class MedicationsDaoTest {
 
-    private static final Medication MEDICATION = new Medication("title", "description", "id", true);
+    private static final Medication MEDICATION = new Medication("title", "description", "3", "22/22/2016",
+            "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0,"id", true);
 
     private MedicationDatabase mDatabase;
 
@@ -71,7 +58,8 @@ public class MedicationsDaoTest {
         mDatabase.taskDao().insertMedication(MEDICATION);
 
         // When a task with the same id is inserted
-        Medication newMedication = new Medication("title2", "description2", "id", true);
+        Medication newMedication = new Medication("title2", "description2", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0,"id",true);
         mDatabase.taskDao().insertMedication(newMedication);
         // When getting the task by id from the database
         Medication loaded = mDatabase.taskDao().getMedicationById(MEDICATION.getId());
@@ -100,7 +88,8 @@ public class MedicationsDaoTest {
         mDatabase.taskDao().insertMedication(MEDICATION);
 
         // When the task is updated
-        Medication updatedMedication = new Medication("title2", "description2", "id", true);
+        Medication updatedMedication = new Medication("title2", "description2", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0,"id",true);
         mDatabase.taskDao().updateMedication(updatedMedication);
 
         // When getting the task by id from the database

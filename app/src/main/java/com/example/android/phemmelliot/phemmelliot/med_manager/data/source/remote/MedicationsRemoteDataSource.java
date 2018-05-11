@@ -40,8 +40,8 @@ public class MedicationsRemoteDataSource implements MedicationsDataSource {
 
     static {
         TASKS_SERVICE_DATA = new LinkedHashMap<>(2);
-        addMedication("Paracetamol", "Take two dosages three times a day", "1 per day","11/04/2018", "12/05/2018");
-        addMedication("Panadol", "Take 4 pill per dosage 2 times a day", "1 per day","11/04/2018", "12/05/2018");
+        addMedication("Paracetamol", "Take two dosages three times a day", "1 per day","11/04/2018", "12/05/2018",3,4,2018,4,5,2018,5,5,0,0,0,0);
+        addMedication("Panadol", "Take 4 pill per dosage 2 times a day", "1 per day","11/05/2018", "12/06/2018",4,5,2019,5,6,2019,6,6,0,0,0,0);
     }
 
     public static MedicationsRemoteDataSource getInstance() {
@@ -54,8 +54,10 @@ public class MedicationsRemoteDataSource implements MedicationsDataSource {
     // Prevent direct instantiation.
     private MedicationsRemoteDataSource() {}
 
-    private static void addMedication(String title, String description, String frequency,  String start, String end) {
-        Medication newMedication = new Medication(title, description, frequency, start, end);
+    private static void addMedication(String title, String description, String frequency,  String start, String end, int startDay,
+                                      int startMonth, int startYear, int endDay, int endMonth, int endYear, int startHour, int startMinute,
+                                      int midHour, int midMinute, int endHour, int endMinute) {
+        Medication newMedication = new Medication(title, description, frequency, start, end, startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midHour, midMinute, endHour, endMinute);
         TASKS_SERVICE_DATA.put(newMedication.getId(), newMedication);
     }
 
@@ -103,8 +105,10 @@ public class MedicationsRemoteDataSource implements MedicationsDataSource {
     @Override
     public void completeMessage(@NonNull Medication medication) {
         Medication completedMedication = new Medication(medication.getTitle(), medication.getDescription(),
-                medication.getFrequency(), medication.getStart(), medication.getEnd(),
-                startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midHour, midMinute, endHour, endMinute, medication.getId(), true);
+                medication.getFrequency(), medication.getStart(), medication.getEnd(),medication.getStartDay(), medication.getStartMonth(), medication.getStartYear(),
+                medication.getEndDay(), medication.getEndMonth(), medication.getEndYear(), medication.getStartHour(),
+                medication.getStartMinute(), medication.getMidHour(), medication.getMidMinute(), medication.getEndHour(),
+                medication.getEndMinute(), medication.getId(), true);
         TASKS_SERVICE_DATA.put(medication.getId(), completedMedication);
     }
 
@@ -117,7 +121,10 @@ public class MedicationsRemoteDataSource implements MedicationsDataSource {
     @Override
     public void activateMessage(@NonNull Medication medication) {
         Medication activeMedication = new Medication(medication.getTitle(), medication.getDescription(),
-                medication.getFrequency(), medication.getStart(), medication.getEnd(), startDay, startMonth, startYear, endDay, endMonth, endYear, startHour, startMinute, midhour, midMinute, endHour, endMinute, medication.getId());
+                medication.getFrequency(), medication.getStart(), medication.getEnd(),medication.getStartDay(), medication.getStartMonth(), medication.getStartYear(),
+                medication.getEndDay(), medication.getEndMonth(), medication.getEndYear(), medication.getStartHour(),
+                medication.getStartMinute(), medication.getMidHour(), medication.getMidMinute(), medication.getEndHour(),
+                medication.getEndMinute(), medication.getId());
         TASKS_SERVICE_DATA.put(medication.getId(), activeMedication);
     }
 

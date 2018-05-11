@@ -72,8 +72,11 @@ public class MedicationsPresenterTest {
         when(mTasksView.isActive()).thenReturn(true);
 
         // We start the medications to 3, with one active and two completed
-        Medications = Lists.newArrayList(new Medication("Title1", "Description1"),
-                new Medication("Title2", "Description2", true), new Medication("Title3", "Description3", true));
+        Medications = Lists.newArrayList(new Medication("Title1", "Description1", "3", "22/22/2016",
+                        "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0),
+                new Medication("Title2", "Description2", "3", "22/22/2016",
+                        "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true), new Medication("Title3", "Description3", "3", "22/22/2016",
+                        "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true));
     }
 
     @Test
@@ -145,7 +148,7 @@ public class MedicationsPresenterTest {
     @Test
     public void clickOnFab_ShowsAddTaskUi() {
         // When adding a new task
-        mMedicationsPresenter.addNewTask();
+        mMedicationsPresenter.addNewMedication();
 
         // Then add task UI is shown
         verify(mTasksView).showAddMedication();
@@ -154,10 +157,11 @@ public class MedicationsPresenterTest {
     @Test
     public void clickOnTask_ShowsDetailUi() {
         // Given a stubbed active task
-        Medication requestedMedication = new Medication("Details Requested", "For this task");
+        Medication requestedMedication = new Medication("Details Requested", "For this task", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // When open task details is requested
-        mMedicationsPresenter.openTaskDetails(requestedMedication);
+        mMedicationsPresenter.openMedicationDetails(requestedMedication);
 
         // Then task detail UI is shown
         verify(mTasksView).showMedicationDetailsUi(any(String.class));
@@ -166,10 +170,11 @@ public class MedicationsPresenterTest {
     @Test
     public void completeTask_ShowsTaskMarkedComplete() {
         // Given a stubbed medication
-        Medication medication = new Medication("Details Requested", "For this medication");
+        Medication medication = new Medication("Details Requested", "For this medication", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0);
 
         // When medication is marked as complete
-        mMedicationsPresenter.completeTask(medication);
+        mMedicationsPresenter.completeMedication(medication);
 
         // Then repository is called and medication marked complete UI is shown
         verify(mTasksRepository).completeMessage(medication);
@@ -179,11 +184,12 @@ public class MedicationsPresenterTest {
     @Test
     public void activateTask_ShowsTaskMarkedActive() {
         // Given a stubbed completed medication
-        Medication medication = new Medication("Details Requested", "For this medication", true);
+        Medication medication = new Medication("Details Requested", "For this medication", "3", "22/22/2016",
+                "34/35/2017",3,4,2018,4,5,2018,5,5,0,0,0,0, true);
         mMedicationsPresenter.loadMedications(true);
 
         // When medication is marked as activated
-        mMedicationsPresenter.activateTask(medication);
+        mMedicationsPresenter.activateMedication(medication);
 
         // Then repository is called and medication marked active UI is shown
         verify(mTasksRepository).activateMessage(medication);
